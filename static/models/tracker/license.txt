@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tracker (Paw Patrol)
+* source:	https://sketchfab.com/3d-models/tracker-paw-patrol-fc0021fcab7a42a6b626df33f5804aa0
+* author:	guinavarro.al (https://sketchfab.com/guinavarro.al)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tracker (Paw Patrol)" (https://sketchfab.com/3d-models/tracker-paw-patrol-fc0021fcab7a42a6b626df33f5804aa0) by guinavarro.al (https://sketchfab.com/guinavarro.al) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

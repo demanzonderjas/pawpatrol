@@ -1,0 +1,11 @@
+Model Information:
+* title:	Rubble (Paw Patrol V2)
+* source:	https://sketchfab.com/3d-models/rubble-paw-patrol-v2-a03d8cdb3ca84fa4a2c5e2d18d2e9376
+* author:	guinavarro.al (https://sketchfab.com/guinavarro.al)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Rubble (Paw Patrol V2)" (https://sketchfab.com/3d-models/rubble-paw-patrol-v2-a03d8cdb3ca84fa4a2c5e2d18d2e9376) by guinavarro.al (https://sketchfab.com/guinavarro.al) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

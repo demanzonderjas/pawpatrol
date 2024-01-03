@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ryder (Paw Patrol)
+* source:	https://sketchfab.com/3d-models/ryder-paw-patrol-e4624cf752fe429b871d29e6b28e1e77
+* author:	guinavarro.al (https://sketchfab.com/guinavarro.al)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ryder (Paw Patrol)" (https://sketchfab.com/3d-models/ryder-paw-patrol-e4624cf752fe429b871d29e6b28e1e77) by guinavarro.al (https://sketchfab.com/guinavarro.al) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
