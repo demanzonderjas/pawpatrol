@@ -5,13 +5,26 @@ export const COLLISION_RANGE = 60;
 
 export const pups: TModelSettings[] = [
     {
+        name: "Chase",
+        character: "c",
+    },
+    {
+        name: "Marshall",
+        character: "m",
+    },
+    {
         name: "Skye",
         size: BASE_SIZE_SCALE * 10,
         character: "s",
     },
     {
-        name: "Chase",
-        character: "c",
+        name: "Rubble",
+        size: BASE_SIZE_SCALE / 1.5,
+        character: "u",
+    },
+    {
+        name: "Zuma",
+        character: "z",
     },
     {
         name: "Rocky",
@@ -21,16 +34,9 @@ export const pups: TModelSettings[] = [
     {
         name: "Everest",
         character: "e",
+        size: BASE_SIZE_SCALE / 1.25,
     },
-    {
-        name: "Marshall",
-        character: "m",
-    },
-    {
-        name: "Rubble",
-        size: BASE_SIZE_SCALE / 1.5,
-        character: "u",
-    },
+
     {
         name: "Tracker",
         size: BASE_SIZE_SCALE / 2,
@@ -40,10 +46,6 @@ export const pups: TModelSettings[] = [
         name: "Ryder",
         size: BASE_SIZE_SCALE / 2,
         character: "y",
-    },
-    {
-        name: "Zuma",
-        character: "z",
     },
 ];
 

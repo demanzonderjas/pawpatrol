@@ -42,7 +42,6 @@ export class GameplayController {
     }
 
     async loadCharacter(settings: TModelSettings) {
-        console.log("hello!", settings);
         const model = await loadModel(this.scene, settings);
         model.position.copy(this.player.model.position);
         this.player.model.parent.remove(this.player.model);
