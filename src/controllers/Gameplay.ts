@@ -5,6 +5,8 @@ import { pups } from "../configs/gameplay";
 import { isModelInRange, random } from "../utils/math";
 import { keyboard } from "./Keyboard";
 import { MoveController } from "./Move";
+import { score } from "../stores/gameplay";
+import { CharacterSelectController } from "./CharacterSelect";
 
 export class GameplayController {
     scene: Scene = null;
@@ -15,15 +17,16 @@ export class GameplayController {
 
     player: TActiveModel = null;
 
-    score: number = 0;
-
     moveController: MoveController = null;
+
+    characterSelectController: CharacterSelectController = null;
 
     constructor(scene: Scene) {
         this.scene = scene;
         this.setPlayer();
         this.setNewTarget();
         this.moveController = new MoveController(this);
+        this.characterSelectController = new CharacterSelectController(this);
         keyboard.addListener({ event: "keydown", callback: this.checkCollision.bind(this) });
     }
 
@@ -38,6 +41,14 @@ export class GameplayController {
         return { ...randomModel, model };
     }
 
+    async loadCharacter(settings: TModelSettings) {
+        console.log("hello!", settings);
+        const model = await loadModel(this.scene, settings);
+        model.position.copy(this.player.model.position);
+        this.player.model.parent.remove(this.player.model);
+        this.player = { ...settings, model };
+    }
+
     async setPlayer() {
         const model = await this.addRandomModel();
         this.player = model;
@@ -50,8 +61,8 @@ export class GameplayController {
 
     checkCollision() {
         if (isModelInRange(this.player, this.activeTarget)) {
-            this.score += 1;
             this.activeTarget.model.parent.remove(this.activeTarget.model);
+            score.increment();
             this.setNewTarget();
         }
     }

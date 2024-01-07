@@ -3,6 +3,7 @@
     import * as THREE from "three";
     import { addCameraToScene, addGridToScene, addLightToScene, createRenderer } from "../utils/scene";
     import { GameplayController } from "../controllers/Gameplay";
+    import { score } from "../stores/gameplay";
 
     let gameplay: GameplayController;
 
@@ -32,7 +33,7 @@
     });
 </script>
 
-<p>Score: {gameplay?.score}</p>
+<p>Score: {$score}</p>
 <button on:click={() => location.reload()}>Reset</button>
 
 <style>

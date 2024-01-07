@@ -25,28 +25,28 @@ export class MoveController {
             return;
         }
         if (e.key === "ArrowLeft") {
-            if (this.player.model.position.x < -500) {
+            if (this.player.model.position.x < -420) {
                 return;
             }
             this.acc += this.acc + ACC_SPEED;
             this.player.model.position.x -= BASE_SPEED + Math.min(this.acc, 20);
             this.player.model.rotation.y = MathUtils.degToRad(-90);
         } else if (e.key === "ArrowRight") {
-            if (this.player.model.position.x > 500) {
+            if (this.player.model.position.x > 420) {
                 return;
             }
             this.acc += this.acc + ACC_SPEED;
             this.player.model.position.x += BASE_SPEED + Math.min(this.acc, 20);
             this.player.model.rotation.y = MathUtils.degToRad(90);
         } else if (e.key === "ArrowDown") {
-            if (this.player.model.position.z > 500) {
+            if (this.player.model.position.z > 420) {
                 return;
             }
             this.acc += this.acc + ACC_SPEED;
             this.player.model.position.z += BASE_SPEED + Math.min(this.acc, 20);
             this.player.model.rotation.y = 0;
         } else if (e.key === "ArrowUp") {
-            if (this.player.model.position.z < -500) {
+            if (this.player.model.position.z < -420) {
                 return;
             }
             this.acc += this.acc + ACC_SPEED;
