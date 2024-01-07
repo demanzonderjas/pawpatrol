@@ -20,11 +20,17 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            if (gameplay.player?.model) {
-                camera.lookAt(gameplay.player.model.position);
-            }
+            // if (gameplay.player?.model) {
+            //     camera.lookAt(gameplay.player.model.position);
+            // }
             if (gameplay.activeTarget?.model) {
                 gameplay.activeTarget.model.rotation.y += 0.01;
+            }
+            if (gameplay.jumpController) {
+                gameplay.jumpController.update(performance.now());
+            }
+            if (gameplay.moveController) {
+                gameplay.moveController.update(performance.now());
             }
 
             renderer.render(scene, camera);
@@ -51,7 +57,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        max-width: 4ch;
+        max-width: 400px;
 
         img {
             max-width: 100%;

@@ -3,6 +3,16 @@ import { BASE_SIZE_SCALE } from "./scene";
 
 export const COLLISION_RANGE = 60;
 
+export const JUMP_DISTANCE = 150;
+
+export const JUMP_HEIGHT = 100;
+
+export const MOVE_DURATION = 300;
+
+export const JUMP_DURATION = 500;
+
+export const MOVE_DISTANCE = 100;
+
 export const pups: TModelSettings[] = [
     {
         name: "Chase",
