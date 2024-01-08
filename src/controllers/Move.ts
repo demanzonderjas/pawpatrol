@@ -40,7 +40,6 @@ export class MoveController {
     handleRelease(e: KeyboardEvent) {
         if (e.key.match("Arrow")) {
             this.isMoving = false;
-            this.gameplay.obstacleController.checkCollision();
         }
     }
 
@@ -120,6 +119,10 @@ export class MoveController {
                     this.startPosition.y,
                     this.startPosition.z + this.getZDistance(this.gameplay.activeDirection)
                 );
+            }
+            const isHit = this.gameplay.obstacleController.checkCollision();
+            if (isHit) {
+                this.endPosition.set(this.startPosition.x, this.startPosition.y + 100, this.startPosition.z);
             }
         }
     }

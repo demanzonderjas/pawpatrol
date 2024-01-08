@@ -1,4 +1,4 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial, Raycaster, Vector3 } from "three";
+import { Box3, BoxGeometry, Mesh, MeshBasicMaterial, Raycaster, SphereGeometry, Vector3 } from "three";
 import type { GameplayController } from "./Gameplay";
 import { NUMBER_OF_OBSTACLES } from "../configs/gameplay";
 import { getRandomValue, isModelInRange } from "../utils/math";
@@ -17,35 +17,42 @@ export class ObstacleController {
     }
 
     createObstacle() {
-        const geometry = new BoxGeometry(125, 50, 10);
+        const geometry = new BoxGeometry(125, 50, 50);
         const material = new MeshBasicMaterial({ color: 0xff0000 });
         const obstacle = new Mesh(geometry, material);
+
         obstacle.position.set(getRandomValue(0, 500), 25, getRandomValue(0, 500));
         this.obstacles.push(obstacle);
-
+        obstacle.updateMatrixWorld(true);
         this.gameplay.scene.add(obstacle);
+        this.visualizeVertices(obstacle.geometry, obstacle.matrixWorld);
+    }
+
+    // Function to visualize vertices
+    visualizeVertices(geometry, meshMatrixWorld) {
+        const material = new MeshBasicMaterial({ color: 0x0000ff });
+        const vertices = geometry.attributes.position.array;
+
+        for (let i = 0; i < vertices.length; i += 3) {
+            const localVertex = new Vector3(vertices[i], vertices[i + 1], vertices[i + 2]);
+            const globalVertex = localVertex.clone().applyMatrix4(meshMatrixWorld);
+            const vertexGeometry = new SphereGeometry(6, 6, 6);
+            const vertexMesh = new Mesh(vertexGeometry, material);
+            vertexMesh.position.copy(globalVertex);
+            this.gameplay.scene.add(vertexMesh);
+        }
     }
 
     checkCollision() {
-        const { collider: line } = this.gameplay;
-        console.log(this.obstacles.length);
+        const { player } = this.gameplay;
         for (let obstacle of this.obstacles) {
-            const vertices = obstacle.geometry.attributes.position.array;
-            const directionVector = new Vector3();
-            for (let i = 0; i < vertices.length; i += 3) {
-                const startPoint = new Vector3(vertices[i], vertices[i + 1], vertices[i + 2]);
-                startPoint.applyMatrix4(line.matrixWorld);
-                for (let j = i + 3; j < vertices.length; j += 3) {
-                    const endPoint = new Vector3(vertices[j], vertices[j + 1], vertices[j + 2]);
-                    endPoint.applyMatrix4(line.matrixWorld);
-                    directionVector.subVectors(endPoint, startPoint);
-                    const ray = new Raycaster(startPoint, directionVector.normalize(), 0, directionVector.length());
-                    const intersects = ray.intersectObject(obstacle);
-                    if (intersects.length > 0) {
-                        console.log("Collision detected");
-                        return true;
-                    }
-                }
+            if (!obstacle.geometry.boundingBox) {
+                obstacle.geometry.computeBoundingBox();
+            }
+            const worldBoundingBox = new Box3().copy(obstacle.geometry.boundingBox).applyMatrix4(obstacle.matrixWorld);
+            const isColliding = worldBoundingBox.containsPoint(player.model.position);
+            if (isColliding) {
+                return true;
             }
         }
 

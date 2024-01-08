@@ -1,4 +1,5 @@
 import {
+    Box3,
     BoxGeometry,
     EdgesGeometry,
     LineBasicMaterial,
@@ -31,6 +32,8 @@ export class GameplayController {
     player: TActiveModel = null;
 
     collider: LineSegments = null;
+
+    box: Mesh = null;
 
     moveController: MoveController = null;
 
