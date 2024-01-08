@@ -36,6 +36,10 @@ export class JumpController {
                 this.isJumping = false;
             }
             this.moveController.gameplay.checkCollision();
+            const isHit = this.moveController.gameplay.obstacleController.checkCollision();
+            if (isHit) {
+                this.endPosition.set(this.startPosition.x, this.startPosition.y, this.startPosition.z);
+            }
         }
     }
 
