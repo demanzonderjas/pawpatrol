@@ -62,7 +62,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        max-width: 400px;
+        max-width: 300px;
 
         img {
             max-width: 100%;
@@ -94,8 +94,8 @@
                 }
                 span {
                     background-color: black;
-                    padding: 10px;
-                    font-size: 1.5em;
+                    padding: 5px;
+                    font-size: 1.25em;
                     color: white;
                     display: inline-flex;
                     align-self: center;

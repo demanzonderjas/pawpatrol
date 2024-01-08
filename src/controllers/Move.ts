@@ -52,27 +52,15 @@ export class MoveController {
             return;
         }
         if (e.key === "ArrowLeft") {
-            if (this.player.model.position.x < -420) {
-                return;
-            }
             this.player.model.rotation.y = MathUtils.degToRad(-90);
             this.gameplay.setActiveDirection("left");
         } else if (e.key === "ArrowRight") {
-            if (this.player.model.position.x > 420) {
-                return;
-            }
             this.player.model.rotation.y = MathUtils.degToRad(90);
             this.gameplay.setActiveDirection("right");
         } else if (e.key === "ArrowDown") {
-            if (this.player.model.position.z > 420) {
-                return;
-            }
             this.player.model.rotation.y = 0;
             this.gameplay.setActiveDirection("down");
         } else if (e.key === "ArrowUp") {
-            if (this.player.model.position.z < -420) {
-                return;
-            }
             this.player.model.rotation.y = MathUtils.degToRad(180);
             this.gameplay.setActiveDirection("up");
         }
@@ -85,8 +73,14 @@ export class MoveController {
 
     getXDistance(direction: TDirection) {
         if (direction === "left") {
+            if (this.player.model.position.x < -420) {
+                return 0;
+            }
             return -MOVE_DISTANCE;
         } else if (direction === "right") {
+            if (this.player.model.position.x > 420) {
+                return 0;
+            }
             return MOVE_DISTANCE;
         } else {
             return 0;
@@ -95,8 +89,14 @@ export class MoveController {
 
     getZDistance(direction: TDirection) {
         if (direction === "up") {
+            if (this.player.model.position.z < -420) {
+                return 0;
+            }
             return -MOVE_DISTANCE;
         } else if (direction === "down") {
+            if (this.player.model.position.z > 420) {
+                return 0;
+            }
             return MOVE_DISTANCE;
         } else {
             return 0;
@@ -120,6 +120,7 @@ export class MoveController {
                     this.startPosition.z + this.getZDistance(this.gameplay.activeDirection)
                 );
             }
+            this.gameplay.obstacleController.checkCollision();
         }
     }
 }

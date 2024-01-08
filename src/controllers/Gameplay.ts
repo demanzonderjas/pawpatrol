@@ -1,4 +1,13 @@
-import type { Object3D, Scene } from "three";
+import {
+    BoxGeometry,
+    EdgesGeometry,
+    LineBasicMaterial,
+    LineSegments,
+    Mesh,
+    MeshBasicMaterial,
+    type Object3D,
+    type Scene,
+} from "three";
 import { loadModel } from "../utils/models";
 import type { TActiveModel, TModelName, TModelSettings } from "../typings/models";
 import { pups } from "../configs/gameplay";
@@ -10,6 +19,7 @@ import { CharacterSelectController } from "./CharacterSelect";
 import { JumpController } from "./Jump";
 import type { TDirection } from "../typings/gameplay";
 import { ObstacleController } from "./Obstacle";
+import { BASE_SIZE_SCALE } from "../configs/scene";
 
 export class GameplayController {
     scene: Scene = null;
@@ -19,6 +29,8 @@ export class GameplayController {
     activeTarget: TActiveModel = null;
 
     player: TActiveModel = null;
+
+    collider: LineSegments = null;
 
     moveController: MoveController = null;
 
@@ -60,12 +72,14 @@ export class GameplayController {
         model.position.copy(this.player.model.position);
         this.player.model.parent.remove(this.player.model);
         this.player = { ...settings, model };
+        this.createCollider();
         this.jumpController.setModel(this.player.model);
     }
 
     async setPlayer() {
         const model = await this.addRandomModel();
         this.player = model;
+        this.createCollider();
         this.jumpController.setModel(this.player.model);
     }
 
@@ -73,6 +87,22 @@ export class GameplayController {
         const model = await this.addRandomModel();
         this.activeTarget = model;
         this.hasCollided = false;
+    }
+
+    createCollider() {
+        const scaleFactor = this.player.model.scale.x / BASE_SIZE_SCALE;
+        const boxSize = 5 / scaleFactor;
+        const boxGeometry = new BoxGeometry(boxSize, boxSize, boxSize);
+        const boxMaterial = new MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0 });
+        const box = new Mesh(boxGeometry, boxMaterial);
+        this.player.model.add(box);
+
+        const edges = new EdgesGeometry(boxGeometry);
+        const line = new LineSegments(edges, new LineBasicMaterial({ color: 0xffff00 }));
+        this.player.model.add(line);
+        this.collider = line;
+
+        line.position.set(0, boxSize / 2, 0);
     }
 
     checkCollision() {

@@ -45,9 +45,9 @@ export class JumpController {
             this.jumpStartTime = performance.now();
             this.startPosition.copy(this.mesh.position);
             this.endPosition.set(
-                this.startPosition.x + this.getXDistance(direction),
+                Math.min(Math.max(this.startPosition.x + this.getXDistance(direction), -420), 420),
                 this.startPosition.y,
-                this.startPosition.z + this.getZDistance(direction)
+                Math.min(Math.max(this.startPosition.z + this.getZDistance(direction), -420), 420)
             );
         }
     }
