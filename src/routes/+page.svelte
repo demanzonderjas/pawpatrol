@@ -8,7 +8,7 @@
 
     let gameplay: GameplayController;
 
-    onMount(async () => {
+    onMount(() => {
         const scene = new THREE.Scene();
         const renderer = createRenderer();
         const camera = addCameraToScene(scene, renderer);
@@ -36,6 +36,11 @@
             renderer.render(scene, camera);
         }
         animate();
+
+        return () => {
+            renderer.dispose();
+            document.body.removeChild(renderer.domElement);
+        };
     });
 </script>
 

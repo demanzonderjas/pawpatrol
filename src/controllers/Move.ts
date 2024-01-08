@@ -1,5 +1,4 @@
 import { MathUtils, Vector3 } from "three";
-import { ACC_SPEED, BASE_SPEED } from "../configs/scene";
 import type { GameplayController } from "./Gameplay";
 import { keyboard } from "./Keyboard";
 import { MOVE_DISTANCE, MOVE_DURATION } from "../configs/gameplay";
@@ -28,14 +27,24 @@ export class MoveController {
             event: "keydown",
             callback: this.handleMove.bind(this),
         });
+        keyboard.addListener({
+            event: "keyup",
+            callback: this.handleRelease.bind(this),
+        });
     }
 
     get player() {
         return this.gameplay.player;
     }
 
+    handleRelease(e: KeyboardEvent) {
+        if (e.key.match("Arrow")) {
+            this.isMoving = false;
+        }
+    }
+
     handleMove(e: KeyboardEvent) {
-        if (e.key.match("Arrow") && !this.isMoving && this.player) {
+        if (e.key.match("Arrow") && !this.isMoving && this.player && !this.gameplay.jumpController.isJumping) {
             this.isMoving = true;
             this.moveStartTime = performance.now();
             this.startPosition.copy(this.player.model.position);
@@ -99,11 +108,17 @@ export class MoveController {
             const elapsedTime = time - this.moveStartTime;
             if (elapsedTime < MOVE_DURATION) {
                 const progress = elapsedTime / MOVE_DURATION;
+                this.player.model.position.y = this.startPosition.y;
                 this.player.model.position.x = MathUtils.lerp(this.startPosition.x, this.endPosition.x, progress);
                 this.player.model.position.z = MathUtils.lerp(this.startPosition.z, this.endPosition.z, progress);
             } else {
-                this.player.model.position.set(this.endPosition.x, this.startPosition.y, this.endPosition.z);
-                this.isMoving = false;
+                this.moveStartTime = performance.now();
+                this.startPosition.copy(this.player.model.position);
+                this.endPosition.set(
+                    this.startPosition.x + this.getXDistance(this.gameplay.activeDirection),
+                    this.startPosition.y,
+                    this.startPosition.z + this.getZDistance(this.gameplay.activeDirection)
+                );
             }
         }
     }

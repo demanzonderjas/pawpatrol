@@ -9,6 +9,7 @@ import { score } from "../stores/gameplay";
 import { CharacterSelectController } from "./CharacterSelect";
 import { JumpController } from "./Jump";
 import type { TDirection } from "../typings/gameplay";
+import { ObstacleController } from "./Obstacle";
 
 export class GameplayController {
     scene: Scene = null;
@@ -29,6 +30,8 @@ export class GameplayController {
 
     jumpController: JumpController = null;
 
+    obstacleController: ObstacleController;
+
     constructor(scene: Scene) {
         this.scene = scene;
         this.setPlayer();
@@ -36,6 +39,7 @@ export class GameplayController {
         this.moveController = new MoveController(this);
         this.jumpController = new JumpController(this.moveController);
         this.characterSelectController = new CharacterSelectController(this);
+        this.obstacleController = new ObstacleController(this);
         keyboard.addListener({ event: "keydown", callback: this.checkCollision.bind(this) });
         keyboard.addListener({ event: "keypress", callback: this.checkJump.bind(this) });
     }
@@ -85,9 +89,7 @@ export class GameplayController {
     }
 
     checkJump(event: KeyboardEvent) {
-        console.log("jump!?");
         if (event.key === " ") {
-            console.log("go!");
             this.jumpController.jump(this.activeDirection);
         }
     }

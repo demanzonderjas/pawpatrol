@@ -19,7 +19,6 @@ export class JumpController {
     }
 
     setModel(model: Object3D) {
-        console.log("new model", model);
         this.mesh = model;
     }
 
@@ -41,8 +40,7 @@ export class JumpController {
     }
 
     jump(direction: TDirection) {
-        if (!this.isJumping && !this.moveController.isMoving) {
-            console.log("JUMP !!!");
+        if (!this.isJumping) {
             this.isJumping = true;
             this.jumpStartTime = performance.now();
             this.startPosition.copy(this.mesh.position);
