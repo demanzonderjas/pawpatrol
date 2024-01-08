@@ -70,6 +70,7 @@ export class GameplayController {
     async loadCharacter(settings: TModelSettings) {
         const model = await loadModel(this.scene, settings);
         model.position.copy(this.player.model.position);
+        model.rotation.copy(this.player.model.rotation);
         this.player.model.parent.remove(this.player.model);
         this.player = { ...settings, model };
         this.createCollider();
