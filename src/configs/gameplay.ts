@@ -13,7 +13,7 @@ export const JUMP_DURATION = 500;
 
 export const MOVE_DISTANCE = 40;
 
-export const NUMBER_OF_OBSTACLES = 5;
+export const NUMBER_OF_OBSTACLES = 11;
 
 export const pups: TModelSettings[] = [
     {

@@ -17,15 +17,15 @@ export class ObstacleController {
     }
 
     createObstacle() {
-        const geometry = new BoxGeometry(125, 50, 50);
-        const material = new MeshBasicMaterial({ color: 0xff0000 });
+        const geometry = new BoxGeometry(125, 50, 30);
+        const material = new MeshBasicMaterial({ color: 0x51087e });
         const obstacle = new Mesh(geometry, material);
 
         obstacle.position.set(getRandomValue(0, 500), 25, getRandomValue(0, 500));
         this.obstacles.push(obstacle);
         obstacle.updateMatrixWorld(true);
         this.gameplay.scene.add(obstacle);
-        this.visualizeVertices(obstacle.geometry, obstacle.matrixWorld);
+        // this.visualizeVertices(obstacle.geometry, obstacle.matrixWorld);
     }
 
     // Function to visualize vertices
