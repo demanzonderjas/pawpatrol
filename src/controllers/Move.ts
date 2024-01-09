@@ -122,7 +122,6 @@ export class MoveController {
             }
             const isHit = this.gameplay.obstacleController.checkCollision();
             if (isHit) {
-                console.log("check here too");
                 const bounceX = this.getXDistance(this.gameplay.activeDirection) * -1;
                 const bounceZ = this.getZDistance(this.gameplay.activeDirection) * -1;
                 this.endPosition.set(this.startPosition.x + bounceX, this.startPosition.y, this.startPosition.z + bounceZ);
